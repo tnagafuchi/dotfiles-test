@@ -1,0 +1,46 @@
+#!/bin/bash -e
+
+REPO="tnagafuchi/dotfiles-test"
+DOTFILES_DIR="$HOME/src/github.com/$REPO"
+
+# Check macOS
+if [ "$(uname)" != "Darwin" ] ; then
+	echo "Not macOS!"
+	exit 1
+fi
+
+# Install CLT for Xcode
+if [ ! -d /Library/Developer/CommandLineTools ]
+	then
+		echo "Installing CLT for Xcode..."
+		xcode-select --install > /dev/null
+	else
+		echo "CLT for Xcode already installed."
+fi
+
+# Install Homebrew
+if [ ! -f /usr/local/bin/brew ]
+	then
+		echo "Installing Homebrew..."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	else
+		echo "Homebrew already installed."
+fi
+
+# Install bash
+if [ ! -f /usr/local/bin/bash ]
+	then
+		echo "Installing bash..."
+		/usr/local/bin/brew install bash
+	else
+		echo "bash already installed."
+fi
+
+# Checking and Clone dotfiles
+if [ ! -d "${DOTFILES_DIR}" ]
+	then
+		echo "Cloning dotfiles..."
+		git clone "https://github.com/$REPO.git" "${DOTFILES_DIR}"
+	else
+		echo "dotfiles already cloned."
+fi
