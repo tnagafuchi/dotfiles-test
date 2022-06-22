@@ -37,7 +37,7 @@ if [ ! -f /opt/homebrew/bin/bash ]
 fi
 
 # Checking current shell
-echo $SHELL
+echo "Currentry shells is $SHELL"
 
 # Cheking string "/opt/homebrew/bin/bash" in /etc/shells
 
