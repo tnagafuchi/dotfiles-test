@@ -28,12 +28,26 @@ if [ ! -f /opt/homebrew/bin/brew ]
 fi
 
 # Install bash
-if [ ! -f /usr/local/bin/bash ]
+if [ ! -f /opt/homebrew/bin/bash ]
 	then
 		echo "Installing bash..."
 		/opt/homebrew/bin/brew install bash
 	else
 		echo "bash already installed."
+fi
+
+# Checking current shell
+echo $SHELL
+
+# Cheking string "/opt/homebrew/bin/bash" in /etc/shells
+
+grep "/opt/homebrew/bin/bash" /etc/shells
+if [ $? = 0 ]
+	then
+		echo "Including /opt/homebrew/bin/bash in /etc/shells.."
+	else
+		echo "Not strings for /opt/homebrew/bin/bash in /etc/shells.."
+		sudo sh -c 'echo /opt/homebrew/bin/bash >> /etc/shells'
 fi
 
 # Checking and Clone dotfiles
