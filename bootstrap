@@ -22,4 +22,6 @@ if [ ! -d "${DOTFILES_DIR}" ]
 fi
 
 # Run check_arch
+pwd
+ls
 ./${REPO}/test/check_arch
