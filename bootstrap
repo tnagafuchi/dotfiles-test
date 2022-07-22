@@ -24,4 +24,4 @@ fi
 # Run check_arch
 pwd
 ls
-./${REPO}/test/check_arch
+./test/check_arch
