@@ -1,0 +1,25 @@
+#!/bin/bash -e
+
+REPO="tnagafuchi/dotfiles-test"
+DOTFILES_DIR="$HOME/src/github.com/$REPO"
+
+# Install CLT for Xcode
+if [ ! -d /Library/Developer/CommandLineTools ]
+	then
+		echo "Installing CLT for Xcode..."
+		xcode-select --install > /dev/null
+	else
+		echo "CLT for Xcode already installed."
+fi
+
+# Checking and Clone dotfiles
+if [ ! -d "${DOTFILES_DIR}" ]
+	then
+		echo "Cloning dotfiles..."
+		git clone "https://github.com/$REPO.git" "${DOTFILES_DIR}"
+	else
+		echo "dotfiles already cloned."
+fi
+
+# Run check_arch
+./${REPO}/test/check_arch
