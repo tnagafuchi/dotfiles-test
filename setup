@@ -9,52 +9,13 @@ if [ "$(uname)" != "Darwin" ] ; then
 	exit 1
 fi
 
-# Install CLT for Xcode
-if [ ! -d /Library/Developer/CommandLineTools ]
-	then
-		echo "Installing CLT for Xcode..."
-		xcode-select --install > /dev/null
-	else
-		echo "CLT for Xcode already installed."
+# Check ararchitecture
+if [ `uname -m` = 'x86_64' ] ; then
+	echo "you ararchitecture is x86_64" 
+	ARCH=x86_64
+elif [ `uname -m` = 'arm64' ] ; then
+	echo "you ararchitecture is arm64" 
+	ARCH=arm64
 fi
 
-# Install Homebrew
-if [ ! -f /opt/homebrew/bin/brew ]
-	then
-		echo "Installing Homebrew..."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-	else
-		echo "Homebrew already installed."
-fi
-
-# Install bash
-if [ ! -f /opt/homebrew/bin/bash ]
-	then
-		echo "Installing bash..."
-		/opt/homebrew/bin/brew install bash
-	else
-		echo "bash already installed."
-fi
-
-# Checking current shell
-echo "Currentry shells is $SHELL"
-
-# Cheking string "/opt/homebrew/bin/bash" in /etc/shells
-
-grep "/opt/homebrew/bin/bash" /etc/shells
-if [ $? = 0 ]
-	then
-		echo "Including /opt/homebrew/bin/bash in /etc/shells.."
-	else
-		echo "Not strings for /opt/homebrew/bin/bash in /etc/shells.."
-		sudo sh -c 'echo /opt/homebrew/bin/bash >> /etc/shells'
-fi
-
-# Checking and Clone dotfiles
-if [ ! -d "${DOTFILES_DIR}" ]
-	then
-		echo "Cloning dotfiles..."
-		git clone "https://github.com/$REPO.git" "${DOTFILES_DIR}"
-	else
-		echo "dotfiles already cloned."
-fi
+echo $ARCH
