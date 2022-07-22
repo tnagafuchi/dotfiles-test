@@ -3,6 +3,9 @@
 REPO="tnagafuchi/dotfiles-test"
 DOTFILES_DIR="$HOME/src/github.com/$REPO"
 
+# run uname -a
+uname -a
+
 # Check macOS
 if [ "$(uname)" != "Darwin" ] ; then
 	echo "Not macOS!"

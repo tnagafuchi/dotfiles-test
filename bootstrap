@@ -22,6 +22,4 @@ if [ ! -d "${DOTFILES_DIR}" ]
 fi
 
 # Run check_arch
-pwd
-ls
 ./test/check_arch
